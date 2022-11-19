@@ -1,24 +1,26 @@
 ## Description
 
 ---
+This project is to demo the ability using d3 and d3fc to handle large data on browser with hitting web app performance.
+The dummy data rendered on the screen is around 20K data point.
 
-This is transaction listing application with transaction detail page with following detail
+With current setup, d3 and d3fc, the web app can easily render million data point on the screen with bring down the web app. 
 
-- transaction date
-- description
-- category
-- transaction type, debit or credit
+This app includes following features:
+
+- Zoom in and zoom out
+- Annotation to show data point information
+
 
 ### Tech stack
 
 ---
 
 - React + Typescript
-- Redux + Redux-toolkit
 - Styled component
-- React testing library
-- Jest
-- antd as the ui library
+- d3.js
+- d3fc
+- d3-svg-annotation
 
 ### Required Environment
 
@@ -37,5 +39,3 @@ For code structuring, in this project, we follow principle of Proximity which gr
 
 1. `yarn install` to install required packages
 2. `yarn dev` to start a dev server for local development
-3. `yarn test` to run jest
-4. `yarn test:coverage` to check test coverage of the codebase
