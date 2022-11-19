@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { xerToJson } from 'src/lib/utils/xer-parser'
 import { Task } from 'src/interfaces/xer-types'
@@ -23,13 +23,23 @@ const Container = styled.div`
   }
 `
 
+const LoadingContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  font-size: 24px;
+  font-weight: bold;
+`
+
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(false)
+
   const fetchData = useCallback(async () => {
     try {
       const response = await fetch('./fake_project.xer', { method: 'GET' })
 
       if (response.ok) {
         const text = await response.text()
+        setIsLoading(false)
         const { tables } = xerToJson(text) as { tables: { TASK: Array<Task> } }
         const tasks = randomizeTaskSchedule(tables.TASK)
         generateGraph(
@@ -56,6 +66,9 @@ const Home = () => {
       style={{ width: '100%', height: '100vh' }}
     >
       <Container>
+        <LoadingContainer className="flex justify-center align-center">
+          {isLoading ? <p>Loading...</p> : null}
+        </LoadingContainer>
         <div id="my_dataviz"></div>
       </Container>
     </div>
