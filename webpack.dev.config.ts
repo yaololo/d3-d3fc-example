@@ -5,6 +5,7 @@ import { merge } from 'webpack-merge'
 import common from './webpack.common.config'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import ESLintPlugin from 'eslint-webpack-plugin'
+import CopyPlugin from 'copy-webpack-plugin'
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration
@@ -22,6 +23,7 @@ const config: Configuration = merge(common, {
       failOnWarning: false,
       extensions: ['js', 'jsx', 'ts', 'tsx'],
     }),
+    new CopyPlugin({ patterns: ['./fake_project.xer'] }),
   ],
   devServer: {
     static: path.join(__dirname, 'build'),
