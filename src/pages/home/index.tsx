@@ -2,8 +2,9 @@ import React, { useCallback, useEffect } from 'react'
 import styled from 'styled-components'
 import { xerToJson } from 'src/lib/utils/xer-parser'
 import { Task } from 'src/interfaces/xer-types'
-import { randomizeTaskSchedule, generateGraph } from './helper'
+import { randomizeTaskSchedule } from './helper'
 import compareAsc from 'date-fns/compareAsc'
+import { generateGraph } from './generate-graph'
 
 const Container = styled.div`
   .cartesian-chart {
@@ -32,6 +33,7 @@ const Home = () => {
         const { tables } = xerToJson(text) as { tables: { TASK: Array<Task> } }
         const tasks = randomizeTaskSchedule(tables.TASK)
         generateGraph(
+          // Sorting is necessary for finding the closest data point for adding annotation
           tasks.sort((a, b) => compareAsc(a.targetStart, b.targetStart)),
         )
       } else {
