@@ -39,3 +39,4 @@ For code structuring, in this project, we follow principle of Proximity which gr
 
 1. `yarn install` to install required packages
 2. `yarn dev` to start a dev server for local development
+3. go to `localhost:4000` 
